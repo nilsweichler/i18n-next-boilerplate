@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Internationalization in this Project
 
-## Getting Started
+This project uses the `next-intl` package for internationalization (i18n).
 
-First, run the development server:
+## How it works
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The `next-intl` package provides React hooks and components to format dates, numbers, and strings. It also supports message translation and pluralization.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The configuration for `next-intl` is in the [`i18n.ts`](i18n.ts) and [`middleware.ts`](middleware.ts) files.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+In [`i18n.ts`](i18n.ts), we define the supported locales and import the corresponding message files from the `messages` directory.
 
-## Learn More
+In [`middleware.ts`](middleware.ts), we create a middleware using `next-intl` that sets the locale for each request.
 
-To learn more about Next.js, take a look at the following resources:
+## Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+In the pages of the application (for example, [`app/[locale]/page.tsx`](app/[locale]/page.tsx)), we use the `useTranslations` hook from `next-intl` to get the translated messages.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Adding a new locale
 
-## Deploy on Vercel
+To add a new locale:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Add the locale to the `locales` array in [`i18n.ts`](i18n.ts) and [`middleware.ts`](middleware.ts).
+2. Create a new JSON file in the `messages` directory with the translations for the new locale.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Running the project
+
+To run the project with internationalization, use the same commands as usual (`npm run dev`, `npm run build`, `npm run start`).
+
+The locale is determined by the URL of the page. For example, to view the page in English, you would go to `http://localhost:3000/en/page`.
